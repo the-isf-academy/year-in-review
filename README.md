@@ -1,0 +1,12 @@
+# Year in Review
+
+Tool for aggregating student data generated throughout the year
+to be used as part of a reflection on learning excercise.
+
+# Setup
+
+1. Install node.js and nmp (here)[https://nodejs.org/en/download/]
+2. Clone this repo
+3. Run `npm install` in the repo directory.
+4. Get a GitHub token and save in `tokens.txt`
+5. Run the app using `node main.js`

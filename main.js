@@ -28,7 +28,7 @@ const appAuthentication = await auth({
 });
 
 //receiving oauth token from a post request
-//github 
+//github
 
 var fs = require("fs");
 var githubToken = fs.readFileSync("./tokens.txt").toString('utf-8').trim();

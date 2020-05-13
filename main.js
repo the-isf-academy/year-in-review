@@ -1,3 +1,35 @@
+require('dotenv').config()
+
+const http = require('http');
+
+const hostname = '127.0.0.1';
+const port = 3000;
+
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Hello World');
+});
+
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
+});
+
+
+const auth = createOAuthAppAuth({
+  clientId: process.env.GITHUB_CLIENT_ID,
+  clientSecret: process.env.GITHUB_CLIENT_SECRET
+});
+
+// OAuth Apps authenticate using Basic auth, where
+// username is clientId and password is clientSecret
+const appAuthentication = await auth({
+  type: "oauth-app"
+});
+
+//receiving oauth token from a post request
+//github 
+
 var fs = require("fs");
 var githubToken = fs.readFileSync("./tokens.txt").toString('utf-8').trim();
 const { Octokit } = require("@octokit/rest");

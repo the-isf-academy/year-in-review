@@ -5,8 +5,9 @@ to be used as part of a reflection on learning excercise.
 
 # Setup
 
-1. Install node.js and nmp [here](https://nodejs.org/en/download/)
-2. Clone this repo
+1. Install node.js and nmp [here](https://nodejs.org/en/download/).
+2. Clone this repo.
 3. Run `npm install` in the repo directory.
-4. Get a GitHub token [here](https://github.com/settings/tokens), create `tokens.txt`, and paste the token inside. 
-5. Run the app using `node main.js`
+4. Create a `.env` file from the `.env_template` file. Paste in the `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` from the [GitHub app page](https://github.com/organizations/the-isf-academy/settings/applications/1290713). 
+5. Run the app using `node index.js`
+6. Open http://localhost:8080/ in your web browser.

@@ -3,6 +3,12 @@
     "version": "0.0.1",
     "description": "A tool to aggregate students' data from the year for reflection and assessment",
     "dependencies": {
-        "@octokit/rest": "^17.6.0"
+        "@octokit/auth-app": "^2.4.5",
+        "@octokit/rest": "^17.6.0",
+        "axios": "^0.19.2",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "github-app": "^4.0.1",
+        "smee-client": "^1.1.0"
     }
 }

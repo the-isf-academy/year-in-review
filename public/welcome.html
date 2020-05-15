@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Hello</title>
+</head>
+
+<body>
+
+  <div id="welcome">
+  </div>
+
+  <div id="repos">
+    <p>Here are your organization repos:</p>
+    <ul id="repos-list">
+    </ul>
+  </div>
+
+</body>
+<script type="module">
+	// We can get the token from the "access_token" query
+	// param, available in the browsers "location" global
+	const query = window.location.search.substring(1)
+	const token = query.split('access_token=')[1]
+
+    import { Octokit } from "https://cdn.pika.dev/@octokit/rest"
+
+	// Call the user info API using the fetch browser library
+    const octokit = new Octokit({
+      auth: token
+    })
+
+    octokit.request("/user")
+	  .then(res => {
+		// Once we get the response (which has many fields)
+		// Documented here: https://developer.github.com/v3/users/#get-the-authenticated-user
+		// Write "Welcome <user name>" to the documents body
+        console.log(res.data)
+        const welcomeDiv = document.getElementById("welcome")
+		const nameNode = document.createTextNode(`Welcome, ${res.data.name}`)
+		welcomeDiv.appendChild(nameNode)
+	  })
+
+    octokit.repos.listForAuthenticatedUser({
+    })
+      .then(res => {
+        // Listing out the user's repositories
+        console.log(res.data)
+        res.data.forEach(value => {
+          const reposList = document.getElementById("repos-list")
+          const li = document.createElement("li")
+          const repoName = document.createTextNode(`\n${value.name}`)
+          li.appendChild(repoName)
+          reposList.appendChild(li)
+        })
+      })
+
+</script>
+
+</html>

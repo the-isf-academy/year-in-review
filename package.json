@@ -6,6 +6,7 @@
         "@octokit/auth-app": "^2.4.5",
         "@octokit/rest": "^17.6.0",
         "axios": "^0.19.2",
+        "bootstrap": "^4.5.0",
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
         "github-app": "^4.0.1",

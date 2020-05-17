@@ -1,10 +1,14 @@
-<!DOCTYPE html>
 <html>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="style.css" rel="stylesheet" type="text/css" media="screen" />
+<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.6.3/firebaseui.css" />
+<script src="bundle.js"></script>
 <body>
-  <a href="https://github.com/login/oauth/authorize?client_id=f7e5add5d400bcadf603&redirect_uri=http://localhost:8080/oauth/redirect&scope=repo%20read:org" id="github-login">
-    Login with github
-  </a>
+  <div id="container">
+    <center>CS9 Year in Review</center>
+    <center id="loading">Loading...</center>
+    <center id="redirecting" class="hidden">Redirecting...</center>
+    <div id="firebaseui-container"></div>
+  </div>
 </body>
-
 </html>

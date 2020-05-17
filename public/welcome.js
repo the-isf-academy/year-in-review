@@ -1,5 +1,3 @@
-
-console.log("running js");
 // We can get the token from the "access_token" query
 // param, available in the browsers "location" global
 const query = window.location.search.substring(1)
@@ -19,7 +17,7 @@ octokit.request("/user")
 		// Write "Welcome <user name>" to the documents body
     console.log(res.data)
     const welcomeDiv = document.getElementById("welcome")
-		const nameNode = document.createTextNode(`Welcome, ${res.data.name}`)
+		const nameNode = document.createTextNode(`Welcome, ${res.data.login}`)
 		welcomeDiv.appendChild(nameNode)
 	  })
 

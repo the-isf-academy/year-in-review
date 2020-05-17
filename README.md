@@ -7,7 +7,7 @@ to be used as part of a reflection on learning excercise.
 1. Install node.js and npm [here](https://nodejs.org/en/download/).
 2. Clone this repo.
 3. Run `npm install` in the repo directory.
-4. Go to [firebase > Year in Review > Project Settings > Service Accounts](https://console.firebase.google.com/project/year-in-review-89e1b/settings/general/) and generate a private key. Create a file `serviceAccountKeys.json` and paste the contents of the private key into that file.
+4. Go to [firebase > Year in Review > Project Settings > Service Accounts](https://console.firebase.google.com/project/year-in-review-89e1b/settings/general/) and generate a private key. Create a file `serviceAccountKeys.json` in the repo and paste the contents of the downloaded private key into that file.
 5. Run the app using `npm run site` (which launches both webpack and node server)  
 
 # Setup

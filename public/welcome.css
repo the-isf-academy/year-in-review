@@ -2,6 +2,31 @@ div.container {
     padding-top: 20px
 }
 
+body {
+    padding-top: 56px;
+    background: #fff;
+}
+
+.intro {
+    background: #7BC96F;
+    background: -webkit-linear-gradient(#7BC96F, #fff);
+    background: linear-gradient(#7BC96F, #fff);
+}
+
+.bg-dark {
+    background-color: #7BC96F !important;
+}
+
+/* Nav bar */
+.profile-img{
+    margin-right: 5px;
+    float: left;
+    background: url(https://upload.wikimedia.org/wikipedia/commons/a/ae/Katri.jpg) 50% 50% no-repeat; /* 50% 50% centers image in div */
+    background-size: auto 100%; /* Interchange this value depending on prefering width vs. height */
+    width: 20px;
+    height: 20px;
+}
+
 /* Timeline holder */
 ul.timeline {
     list-style-type: none;
@@ -12,7 +37,7 @@ ul.timeline {
  /* Timeline vertical line */
 ul.timeline:before {
     content: ' ';
-    background: #fff;
+    background: #ddd;
     display: inline-block;
     position: absolute;
     left: 16px;
@@ -51,6 +76,10 @@ li.timeline-item::before {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
+.timeline-month {
+
+}
+
 /*Reflection card carousel */
 .carousel {
   margin-left: 50px;
@@ -65,24 +94,14 @@ li.timeline-item::before {
   margin-right: -50px;
 }
 
+.carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%7d7d7d' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+}
+
+.carousel-control-next-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%7d7d7d' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+}
+
 .sticky-offset {
-    top: 40px;
+    top: 96px;
 }
-/*
-*
-* ==========================================
-* FOR DEMO PURPOSES
-* ==========================================
-*
-*/
-body {
-    background: #E8CBC0;
-    background: -webkit-linear-gradient(to right, #E8CBC0, #636FA4);
-    background: linear-gradient(to right, #E8CBC0, #636FA4);
-    min-height: 100vh;
-}
-
-.text-gray {
-    color: #999;
-}
-

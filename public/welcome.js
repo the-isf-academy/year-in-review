@@ -7,32 +7,33 @@ const token = query.split('access_token=')[1]
 
 import { Octokit } from "https://cdn.pika.dev/@octokit/rest"
 
-	// Call the user info API using the fetch browser library
+// Call the user info API using the fetch browser library
 const octokit = new Octokit({
-  auth: token
+    auth: token
 })
 
 octokit.request("/user")
-	  .then(res => {
-		// Once we get the response (which has many fields)
-		// Documented here: https://developer.github.com/v3/users/#get-the-authenticated-user
-		// Write "Welcome <user name>" to the documents body
-    console.log(res.data)
-    const welcomeDiv = document.getElementById("welcome")
-		const nameNode = document.createTextNode(`Welcome, ${res.data.name}`)
-		welcomeDiv.appendChild(nameNode)
-	  })
+    .then(res => {
+        // Once we get the response (which has many fields)
+        // Documented here: https://developer.github.com/v3/users/#get-the-authenticated-user
+        // Write "Welcome <user name>" to the documents body
+        console.log(res.data)
+        const welcomeHeader = document.getElementById("student-welcome")
+        if (res.data.name) {
+            welcomeHeader.textContent = "👾 Welcome, " + res.data.name;
+        }
+    })
 
 octokit.repos.listForAuthenticatedUser({
 })
-  .then(res => {
-    // Listing out the user's repositories
-    console.log(res.data)
-    res.data.forEach(value => {
-      const reposList = document.getElementById("repos-list")
-      const li = document.createElement("li")
-      const repoName = document.createTextNode(`\n${value.name}`)
-      li.appendChild(repoName)
-      reposList.appendChild(li)
+    .then(res => {
+        // Listing out the user's repositories
+        console.log(res.data)
+        res.data.forEach(value => {
+            const reposList = document.getElementById("repos-list")
+            const li = document.createElement("li")
+            const repoName = document.createTextNode(`\n${value.name}`)
+            //li.appendChild(repoName)
+            //reposList.appendChild(li)
+        })
     })
-  })

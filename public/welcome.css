@@ -1,5 +1,5 @@
-div.container {
-    padding-top: 20px
+body.container {
+    padding-top: 56px
 }
 
 body {
@@ -11,10 +11,26 @@ body {
     background: #7BC96F;
     background: -webkit-linear-gradient(#7BC96F, #fff);
     background: linear-gradient(#7BC96F, #fff);
+    height: 100vh;
+}
+
+.bg-primary {
+    background-color: #7BC96F !important;
 }
 
 .bg-dark {
+    background-color: #196127 !important;
+}
+
+.btn-secondary {
+    background-color :#7D7D7D !important;
+    border-color: #7D7D7D !important;
+    color: #EBEBEB;
+}
+
+.btn-primary {
     background-color: #7BC96F !important;
+    border-color: #7BC96F !important;
 }
 
 /* Nav bar */
@@ -25,6 +41,13 @@ body {
     background-size: auto 100%; /* Interchange this value depending on prefering width vs. height */
     width: 20px;
     height: 20px;
+}
+
+
+/* Intro content */
+
+.contrib-graph-img{
+    
 }
 
 /* Timeline holder */
@@ -77,10 +100,15 @@ li.timeline-item::before {
 }
 
 .timeline-month {
-
+    color: #7BC96F;
 }
 
 /*Reflection card carousel */
+
+.card-title {
+    display: inline-block;
+}
+
 .carousel {
   margin-left: 50px;
   margin-right: 50px;

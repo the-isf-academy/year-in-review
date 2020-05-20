@@ -1,3 +1,5 @@
+import 'bootstrap';
+import './scss/custom.scss';
 
 console.log("running js");
 // We can get the token from the "access_token" query

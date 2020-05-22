@@ -1,6 +1,9 @@
 const path = require("path")
 const webpack = require('webpack')
 const HtmlWebPackPlugin = require("html-webpack-plugin")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -13,9 +16,22 @@ module.exports = {
   },
   target: 'web',
   devtool: 'source-map',
+  // Webpack 4 does not have a CSS minifier, although
+  // Webpack 5 will likely come with one
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true // set to true if you want JS source maps
+      }),
+      new OptimizeCSSAssetsPlugin({})
+    ]
+  },
   module: {
     rules: [
       {
+        // Transpiles ES6-8 into ES5
         test: /\.js$/,
         exclude: /node_modules/,
         loader: "babel-loader",
@@ -32,15 +48,12 @@ module.exports = {
         ]
       },
       {
-        test: /\.css$/,
-        use: [ 'style-loader', 'css-loader' ]
-      },
-      {
-        test: /\.scss$/,
+        // Loads CSS into a file when you import it via Javascript
+        // Rules are set in MiniCssExtractPlugin
+        test: /\.(sa|sc|c)ss$/,
         use: [ 
           {
-              // Adds CSS to the DOM by injecting a `<style>` tag
-               loader: 'style-loader'
+            loader: MiniCssExtractPlugin.loader
           },
             // Interprets `@import` and `url()` like `import/require()` and will resolve them
           {
@@ -80,6 +93,10 @@ module.exports = {
       template: "./src/html/welcome.html",
       filename: "./welcome.html",
       excludeChunks: [ 'server' ]
+    }),
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css"
     })
   ]
 }

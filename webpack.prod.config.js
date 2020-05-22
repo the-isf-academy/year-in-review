@@ -32,7 +32,7 @@ module.exports = {
     rules: [
       {
         // Transpiles ES6-8 into ES5
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loader: "babel-loader",
       },

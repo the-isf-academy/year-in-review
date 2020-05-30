@@ -5,6 +5,9 @@ import React from "react";
 import ReactDOM from "react-dom"
 import Timeline from './js/components/timeline'
 
+import './server/firebase.js'
+import './js/welcome.js'
+import './js/database.js'
 // Log message to console
 logMessage('Welcome to Year in Review!')
 

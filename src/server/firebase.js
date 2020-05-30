@@ -14,7 +14,7 @@
 
 var firebase = require('firebase');
 var firebaseui = require('firebaseui');
-var config = require('./config.js');
+var config = require('./firebase_config.js');
 var $ = require('jquery');
 var accessToken;
 
@@ -50,11 +50,6 @@ function getUiConfig() {
     'signInOptions': [
       {
         provider: firebase.auth.GithubAuthProvider.PROVIDER_ID
-      },
-      {
-        provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
-        // Whether the display name should be displayed in Sign Up page.
-        requireDisplayName: true
       }
     ],
     // Terms of service url.

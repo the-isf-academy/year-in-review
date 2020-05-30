@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const HtmlWebPackPlugin = require("html-webpack-plugin")
 
 module.exports = {
+  mode: 'development', 
   entry: {
     main: './src/index.js'
   },
@@ -23,7 +24,7 @@ module.exports = {
       },
       {
         // Loads the javacript into html template provided.
-        // Entry point is set below in HtmlWebPackPlugin in Plugins 
+        // Entry point is set below in HtmlWebPackPlugin in Plugins
         test: /\.html$/,
         use: [
           {
@@ -36,7 +37,7 @@ module.exports = {
         // Loads CSS into a file when you import it via Javascript
         // Rules are set in MiniCssExtractPlugin
         test: /\.(sa|sc|c)ss$/,
-        use: [ 
+        use: [
           {
               // Adds CSS to the DOM by injecting a `<style>` tag
                loader: 'style-loader'

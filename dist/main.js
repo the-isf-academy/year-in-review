@@ -67820,10 +67820,6 @@ function getUiConfig() {
     'signInFlow': 'popup',
     'signInOptions': [{
       provider: firebase.auth.GithubAuthProvider.PROVIDER_ID
-    }, {
-      provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
-      // Whether the display name should be displayed in Sign Up page.
-      requireDisplayName: true
     }],
     // Terms of service url.
     'tosUrl': 'https://www.google.com',

@@ -1,19 +1,19 @@
 import 'bootstrap';
-import './scss/custom.scss';
-
-console.log("running js");
+// import './scss/custom.scss';
 // We can get the token from the "access_token" query
 // param, available in the browsers "location" global
 const query = window.location.search.substring(1)
 const token = query.split('access_token=')[1]
 
-import { Octokit } from "https://cdn.pika.dev/@octokit/rest"
+import { Octokit } from '@octokit/rest';
+// Required for side-effects
+import {storeUser, display} from './database';
+
 
 // Call the user info API using the fetch browser library
 const octokit = new Octokit({
     auth: token
 })
-
 octokit.request("/user")
     .then(res => {
         // Once we get the response (which has many fields)
@@ -24,6 +24,8 @@ octokit.request("/user")
         if (res.data.name) {
             welcomeHeader.textContent = "👾 Welcome, " + res.data.name;
         }
+        storeUser(res);
+        display(res.data.login);
     })
 
 octokit.repos.listForAuthenticatedUser({

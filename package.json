@@ -2,18 +2,12 @@
     "name": "year-in-review",
     "version": "0.0.1",
     "description": "A tool to aggregate students' data from the year for reflection and assessment",
-<<<<<<< HEAD
-    "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "site": "./node_modules/.bin/webpack --config webpack.config.js && node index.js"
-=======
     "main": "index.js",
     "scripts": {
         "buildDev": "rm -rf dist && webpack --mode development --config webpack.server.config.js && webpack --mode development --config webpack.dev.config.js",
         "buildProd": "rm -rf dist && webpack --mode production --config webpack.server.config.js && webpack --mode production --config webpack.prod.config.js",
         "start": "node ./dist/server.js",
         "test": "echo \"Erroe: no test specified\" && exit 1"
->>>>>>> 6fbb8526328a56e61bd6d746bb2a51a5ed324d3e
     },
     "dependencies": {
         "@octokit/auth-app": "^2.4.5",
@@ -29,14 +23,6 @@
         "firebaseui": "^4.5.0",
         "github-app": "^4.0.1",
         "jquery": "^3.5.1",
-<<<<<<< HEAD
-        "popper": "^1.0.1",
-        "smee-client": "^1.1.0",
-        "webpack": "^4.43.0"
-    },
-    "devDependencies": {
-        "webpack-cli": "^3.3.11"
-=======
         "popper.js": "^1.16.1",
         "smee-client": "^1.1.0"
     },
@@ -62,6 +48,5 @@
         "webpack-cli": "^3.3.11",
         "webpack-dev-middleware": "^3.7.2",
         "webpack-node-externals": "^1.7.2"
->>>>>>> 6fbb8526328a56e61bd6d746bb2a51a5ed324d3e
     }
 }

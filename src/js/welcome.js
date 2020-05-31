@@ -11,6 +11,7 @@ import {storeUser, display} from './database';
 import React from "react";
 import ReactDOM from "react-dom"
 import Timeline from './components/timeline'
+import PromptCard from './components/prompts'
 
 
 // Call the user info API using the fetch browser library
@@ -57,7 +58,55 @@ var repo2 = {
     date: new Date('11 March, 2019')
 };
 var repos = [repo0, repo1, repo2];
-const domContainer = document.querySelector('#timeline-container');
-if (domContainer) {
-    ReactDOM.render(<Timeline repos={repos}/>, domContainer);
+
+const timelineDomContainer = document.querySelector('#timeline-container');
+if (timelineDomContainer) {
+    ReactDOM.render(<Timeline repos={repos}/>, timelineDomContainer);
+}
+var formPages = [
+    {
+        id: "G0",
+        criterion: "General",
+        questions: [
+            {
+                id: "G0.0",
+                prompt: "What is your name?",
+                inputStyle: "textInput",
+            },
+            {
+                id: "G0.1",
+                prompt: "How old are you?",
+                inputStyle: "dropdown",
+                inputOptions: [1, 2, 3, 4],
+            }
+        ]
+    },
+    {
+        id: "A0",
+        criterion: "Knowing, understanding, and computational thinking",
+        questions: [
+            {
+                id: "A0.0",
+                prompt: "Here’s a list of concepts we covered this year. Choose a concept that you think is really beautiful or interesting.",
+                inputStyle: "dropdown",
+                inputOptions: ["Functions", "Lists", "Loops"]
+            },
+            {
+                id: "A0.1",
+                prompt: "Select a project that you think showcases the beauty of this concept.",
+                inputStyle: "dropdown",
+                inputOptions: ["Lab1", "lab2", "Lab3"]
+            },
+            {
+                id: "A0.2",
+                prompt: "Describe why you think this project shows the beauty of this concept.",
+                inputStyle: "textInput",
+            }
+        ]
+    },
+]    
+
+const promptsDomContainer = document.querySelector('#prompt-cards-container');
+if (promptsDomContainer) {
+    ReactDOM.render(<PromptCard formPages={formPages} />, promptsDomContainer);
 }

@@ -36,6 +36,7 @@ const app = express(),
     INDEX_HTML_FILE = path.join(DIST_DIR, 'index.html'),
     WELCOME_HTML_FILE = path.join(DIST_DIR, 'welcome.html'),
     compiler = webpack(config)
+
 app.use(webpackDevMiddleware(compiler, {
   publicPath: config.output.publicPath
 }))
@@ -101,7 +102,11 @@ function serveContentForUser(endpoint, req, res, decodedClaims) {
  */
 function attachCsrfToken(url, cookie, value) {
   return function(req, res, next) {
+    console.log("csrf attachment middleware function run");
+    console.log("req.url: "+req.url);
+    console.log("url: "+ url);
     if (req.url == url) {
+      console.log("csrf token attached ib middleware function");
       res.cookie(cookie, value);
     }
     next();
@@ -143,7 +148,7 @@ app.use(bodyParser.urlencoded({
 // Support cookie manipulation.
 app.use(cookieParser());
 // Attach CSRF token on each request.
-app.use(attachCsrfToken('/', 'csrfToken', (Math.random()* 100000000000000000).toString()));
+app.use(attachCsrfToken('/*', 'csrfToken', (Math.random()* 100000000000000000).toString()));
 // // If a user is signed in, redirect to profile page.
 // app.use(checkIfSignedIn('/',));
 // Serve static content from public folder.
@@ -170,6 +175,9 @@ app.post('/sessionLogin', function (req, res) {
   // Get ID token and CSRF token.
   var idToken = req.body.idToken.toString();
   var csrfToken = req.body.csrfToken.toString();
+
+  console.log("csrf token on post for /sessionLogin: "+csrfToken);
+
 
   // Guard against CSRF attacks.
   if (!req.cookies || csrfToken !== req.cookies.csrfToken) {

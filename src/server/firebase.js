@@ -43,7 +43,7 @@ function getUiConfig() {
       },
       'uiShown': function() {
         // Remove progress bar when the UI is ready.
-        document.getElementById('loading').classList.add('hidden');
+        //document.getElementById('loading').classList.add('hidden');
       }
     },
     'signInFlow': 'popup',

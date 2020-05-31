@@ -8,6 +8,9 @@ const token = query.split('access_token=')[1]
 import { Octokit } from '@octokit/rest';
 // Required for side-effects
 import {storeUser, display} from './database';
+import React from "react";
+import ReactDOM from "react-dom"
+import Timeline from './components/timeline'
 
 
 // Call the user info API using the fetch browser library
@@ -41,3 +44,20 @@ octokit.repos.listForAuthenticatedUser({
             //reposList.appendChild(li)
         })
     })
+var repo0 = {
+    name: "project-data-science",
+    date: new Date('21 February, 2019')
+};
+var repo1 = {
+    name: "lab-uno",
+    date: new Date('21 March, 2019')
+};
+var repo2 = {
+    name: "lab-bank",
+    date: new Date('11 March, 2019')
+};
+var repos = [repo0, repo1, repo2];
+const domContainer = document.querySelector('#timeline-container');
+if (domContainer) {
+    ReactDOM.render(<Timeline repos={repos}/>, domContainer);
+}

@@ -1,9 +1,10 @@
 const firebase = require("firebase");
 require("firebase/firestore");
 var db = firebase.firestore();
-
+var USERNAME = "";
 
 export function storeUser(res){
+  USERNAME = res.data.login;
   db.collection("users").doc(res.data.login).set({
       name: res.data.name,
       github_URL: res.data.url,
@@ -15,6 +16,16 @@ export function storeUser(res){
       console.error("Error adding document", error);
   });
 }
+export function storeFormInput(state){
+  db.collection("users").doc(USERNAME).collection("reflections").doc("June2020").set(state)
+  .then(function(docRef) {
+      alert("Submitted! Feel free to Resubmit.");
+  })
+  .catch(function(error) {
+      console.error("Error adding document", error);
+  });
+}
+
 
 
 export function display(username){

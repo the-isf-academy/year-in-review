@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import {storeUser,storeFormInput, display} from '../database';
+
 
 ;'use strict';
 
@@ -114,12 +116,13 @@ class PromptCardForm extends React.Component {
         if (this.handleValidation()) {
             console.log(this.state);
             alert('Are you ready to submit your reflection?');
+            storeFormInput(this.state.fields)
         } else {
             console.log(this.state);
             alert("Form has errors.");
         }
     }
-    
+
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
@@ -147,7 +150,7 @@ function PromptCard(props) {
                     })}
                 </ol>
                 <div className="carousel-inner shadow">
-                    <PromptCardForm formPages={props.formPages} />
+                    <PromptCardForm formPages={props.formPages}/>
                 </div>
                 <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                     <span className="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -163,4 +166,3 @@ function PromptCard(props) {
 }
 
 export default PromptCard;
-

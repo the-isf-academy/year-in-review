@@ -7,9 +7,9 @@ function TextInputQuestion(props) {
         <div className="form-row m-3">
             <label>
                 {props.question.prompt}
-                <textarea name={props.question.id} value={props.formState[props.question.id]} onChange={props.formHandleChange} className="form-control" aria-describedby={"prompt"+props.index+"Help"} placeholder="What do you think?"/>
-                <small id={"prompt"+props.question.id+"Help"} className="form-text text-muted">Be as specific as possible.</small>
             </label>
+                <textarea name={props.question.id} value={props.formState.fields[props.question.id]} onChange={props.formHandleChange} className="form-control" aria-describedby={"prompt"+props.index+"Help"} placeholder="What do you think?"/>
+                <small id={"prompt"+props.question.id+"Help"} className="form-text text-muted">{props.formState.errors[props.question.id]}</small>
         </div>
     )
 }
@@ -19,15 +19,16 @@ function DropdownQuestion(props) {
         <div className="form-row m-3">
             <label>
                 {props.question.prompt}
-                <select name={props.question.id} value={props.formState[props.question.id]} onChange={props.formHandleChange} className="form-control" aria-describedby={"prompt"+props.index+"Help"}>
+            </label>
+                <select name={props.question.id} value={props.formState.fields[props.question.id]} onChange={props.formHandleChange} className="form-control" aria-describedby={"prompt"+props.index+"Help"}>
+                    <option value="" disabled selected hidden>Select an option</option>
                     {props.question.inputOptions.map((option, index) => {
                         return (
                             <option key={index} value={option}>{option}</option>
                         );
                     })}
                 </select>
-                <small id={"prompt"+props.question.id+"Help"} className="form-text text-muted">Be as specific as possible.</small>
-            </label>
+                <small id={"prompt"+props.question.id+"Help"} className="form-text text-muted">{props.formState.errors[props.question.id]}</small>
         </div>
     )
 }
@@ -71,25 +72,52 @@ class PromptCardForm extends React.Component {
     constructor(props) {
         super(props);
         this.formPages = props.formPages;
-        this.state = {};
+        const fields = {}
+        for (const page of props.formPages) {
+            for (const question of page.questions) {
+                fields[question.id] = "";
+            }
+        }
+        this.state = {
+            fields: fields,
+            errors: {}
+        };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    handleValidation() {
+        let formIsValid = true;
+        let errors = {};
+        for (var field of Object.entries(this.state.fields)) {
+            if (field[1] == "") {
+                formIsValid = false;
+                errors[field[0]] = "Cannot be empty";
+            }
+        }
+        this.setState({errors: errors});
+        return formIsValid;
+    }
+
     handleChange(event) {
+        let fields = this.state.fields;
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        this.setState({
-            [name]: value
-        });
+        fields[name] = value;
+        this.setState({fields: fields});
         console.log("change state of "+name+"to "+value);
     }
 
     handleSubmit(event) {
-        console.log(this.state);
-        alert('Are you ready to submit your reflection?');
         event.preventDefault();
+        if (this.handleValidation()) {
+            console.log(this.state);
+            alert('Are you ready to submit your reflection?');
+        } else {
+            console.log(this.state);
+            alert("Form has errors.");
+        }
     }
     
     render() {

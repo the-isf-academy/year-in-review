@@ -83,7 +83,7 @@ var formPages = [
     },
     {
         id: "A0",
-        criterion: "Knowing, understanding, and computational thinking",
+        criterion: "Computational thinking",
         questions: [
             {
                 id: "A0.0",

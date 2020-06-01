@@ -37,6 +37,21 @@ const app = express(),
     WELCOME_HTML_FILE = path.join(DIST_DIR, 'welcome.html'),
     compiler = webpack(config)
 
+// Support JSON-encoded bodies.
+app.use(bodyParser.json());
+// Support URL-encoded bodies.
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+// Support cookie manipulation.
+app.use(cookieParser());
+// // If a user is signed in, redirect to profile page.
+// app.use(checkIfSignedIn('/',));
+// Serve static content from public folder.
+//app.use('/', express.static('public'));
+// Attach CSRF token on each request.
+app.use(attachCsrfToken('/', 'csrfToken', (Math.random()* 100000000000000000).toString()));
+
 app.use(webpackDevMiddleware(compiler, {
   publicPath: config.output.publicPath
 }))
@@ -102,11 +117,7 @@ function serveContentForUser(endpoint, req, res, decodedClaims) {
  */
 function attachCsrfToken(url, cookie, value) {
   return function(req, res, next) {
-    console.log("csrf attachment middleware function run");
-    console.log("req.url: "+req.url);
-    console.log("url: "+ url);
     if (req.url == url) {
-      console.log("csrf token attached ib middleware function");
       res.cookie(cookie, value);
     }
     next();
@@ -139,20 +150,6 @@ function checkIfSignedIn(url) {
 admin.initializeApp({
   credential: admin.credential.cert('serviceAccountKeys.json')
 });
-// Support JSON-encoded bodies.
-app.use(bodyParser.json());
-// Support URL-encoded bodies.
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-// Support cookie manipulation.
-app.use(cookieParser());
-// Attach CSRF token on each request.
-app.use(attachCsrfToken('/*', 'csrfToken', (Math.random()* 100000000000000000).toString()));
-// // If a user is signed in, redirect to profile page.
-// app.use(checkIfSignedIn('/',));
-// Serve static content from public folder.
-app.use('/', express.static('public'));
 
 /** Get profile endpoint. */
 app.get('/profile', function (req, res) {

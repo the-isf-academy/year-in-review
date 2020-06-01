@@ -37,32 +37,13 @@ octokit.repos.listForAuthenticatedUser({
     .then(res => {
         // Listing out the user's repositories
         console.log(res.data)
-        res.data.forEach(value => {
-            const reposList = document.getElementById("repos-list")
-            const li = document.createElement("li")
-            const repoName = document.createTextNode(`\n${value.name}`)
-            //li.appendChild(repoName)
-            //reposList.appendChild(li)
-        })
-    })
-var repo0 = {
-    name: "project-data-science",
-    date: new Date('21 February, 2019')
-};
-var repo1 = {
-    name: "lab-uno",
-    date: new Date('21 March, 2019')
-};
-var repo2 = {
-    name: "lab-bank",
-    date: new Date('11 March, 2019')
-};
-var repos = [repo0, repo1, repo2];
+        const timelineDomContainer = document.querySelector('#timeline-container');
+        if (timelineDomContainer) {
+            ReactDOM.render(<Timeline repos={res.data}/>, timelineDomContainer);
+        }
 
-const timelineDomContainer = document.querySelector('#timeline-container');
-if (timelineDomContainer) {
-    ReactDOM.render(<Timeline repos={repos}/>, timelineDomContainer);
-}
+    })
+
 var formPages = [
     {
         id: "G0",

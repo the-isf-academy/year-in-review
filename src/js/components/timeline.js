@@ -8,21 +8,22 @@ function TimelineMonth(props) {
     ];
     return (
         <div className="timeline-month ml-3 p-4">
-            <h3>{monthNames[props.date]}</h3>
+            <h3>{monthNames[props.month]+" "+props.year}</h3>
         </div>
     );
 }
 
 function TimelineItem(props) {
+    let date = new Date(props.repo.created_at);
     return (
         <li className="timeline-item bg-white rounded ml-3 p-4 shadow">
             <div className="timeline-arrow"></div>
-            <h2 className="repo-name h5 mb-0">{props.repo.name}</h2><span className="small text-gray"><i className="fa fa-clock-o mr-1"></i><p className="repo-creation-date">created {props.repo.date.toString()}</p></span>
-            <p className="repo-description text-small mt-2 font-weight-light">lab-uno-Haji42069 created by GitHub Classroom</p>
+            <h2 className="repo-name h5 mb-0">{props.repo.name}</h2><span className="small text-gray"><i className="fa fa-clock-o mr-1"></i><p className="repo-creation-date">created {date.toDateString()}</p></span>
+            <p className="repo-description text-small mt-2 font-weight-light">{props.repo.description}</p>
             <div className="container repo-buttons">
                 <div className="row align-items-center">
                     <div className="col-lg mx-auto">
-                        <a className="repo-link btn btn-outline-primary" href="https://www.github.com" role="button" target="_blank" rel="noopener noreferrer">Github Repository</a>
+                        <a className="repo-link btn btn-outline-primary" href={props.repo.svn_url} role="button" target="_blank" rel="noopener noreferrer">Github Repository</a>
                     </div>
                     <div className="col-lg mx-auto">
                         <a className="assign-link btn btn-outline-primary" href="#" role="button"  target="_blank" rel="noopener noreferrer">Assignment Page</a>
@@ -34,29 +35,42 @@ function TimelineItem(props) {
 }
 
 function Timeline(props) {
-    var reposByMonth = {}
+    var reposByMonthYear = {}
     for (const repo of props.repos) {
-        var month = repo.date.getMonth();
-        if (reposByMonth[month]) {
-            reposByMonth[month].push(repo);
+        let date = new Date(repo.created_at);
+        const month = date.getMonth();
+        const year = date.getFullYear();
+        if (reposByMonthYear[year]) {
+            if (reposByMonthYear[year][month]) {
+                reposByMonthYear[year][month].push(repo);
+            } else {
+                reposByMonthYear[year][month] = [repo];
+            }
         } else {
-            reposByMonth[month] = [repo];
+            let monthOfRepos = {};
+            monthOfRepos[month] = [repo];
+            reposByMonthYear[year] = monthOfRepos;
         }
     }
 
     return (
         <ul className="timeline">
-            {Object.entries(reposByMonth).map((monthOfRepos, index) => {
+            {Object.entries(reposByMonthYear).map((yearOfRepos, index) => {
                 return (
-                    <div key={index} className="timeline-month-container">
-                        <TimelineMonth date={monthOfRepos[0]}/>
-                        {monthOfRepos[1].map((repo, index) => {
-                            return (
-                                <TimelineItem key={index} repo={repo}/>
-                        )
-                    })}
-                    </div>
-                );
+                    Object.entries(yearOfRepos[1]).map((monthOfRepos, index) => {
+                        return (
+                            <div key={index} className="timeline-month-container">
+                                <TimelineMonth year={yearOfRepos[0]} month={monthOfRepos[0]}/>
+                                {monthOfRepos[1].map((repo, index) => {
+                                    console.log(repo);
+                                    return (
+                                        <TimelineItem key={index} repo={repo}/>
+                                    )
+                                })}
+                            </div>
+                        );
+                    })
+                )
             })}
         </ul>
     );

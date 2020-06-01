@@ -21,7 +21,7 @@ function DropdownQuestion(props) {
                 {props.question.prompt}
             </label>
                 <select name={props.question.id} value={props.formState.fields[props.question.id]} onChange={props.formHandleChange} className="form-control" aria-describedby={"prompt"+props.index+"Help"}>
-                    <option value="" disabled selected hidden>Select an option</option>
+                    <option value="" disabled hidden>Select an option</option>
                     {props.question.inputOptions.map((option, index) => {
                         return (
                             <option key={index} value={option}>{option}</option>

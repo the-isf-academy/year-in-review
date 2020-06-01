@@ -7,15 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Year in Review</title>
         <link rel="shortcut icon" href="#">
-<!--
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-        <link rel="stylesheet" href="welcome.css">
-
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     </head>
--->
 
     <nav class="navbar navbar-expand-lg navbar-light bg-primary fixed-top">
         <a class="navbar-brand" href="#">Year in Review</a>
@@ -67,126 +59,13 @@
             <div class="row">
                 <!-- Timeline -->
                 <div class="col-lg mx-auto">
-                    <ul class="timeline">
-                        <div class="timeline-month ml-3 p-4">
-                            <h3>August</h3>
-                        </div>
-                        <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
-                            <div class="timeline-arrow"></div>
-                            <h2 class="repo-name h5 mb-0">lab-uno</h2><span class="small text-gray"><i class="fa fa-clock-o mr-1"></i><p class="repo-creation-date">created 21 March, 2019</p></span>
-                            <p class="repo-description text-small mt-2 font-weight-light">lab-uno-Haji42069 created by GitHub Classroom</p>
-                            <div class="repo buttons">
-                                <a class="repo-link btn btn-outline-primary" href="https://www.github.com" role="button" target="_blank" rel="noopener noreferrer">Repo on Github</a>
-                                <a class="assign-link btn btn-outline-primary" href="#" role="button"  target="_blank" rel="noopener noreferrer">Assignment Description</a>
-                                <div id="like-button-container"></div>
-                            </div>
-                        </li>
-                        <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
-                            <div class="timeline-arrow"></div>
-                            <h2 class="h5 mb-0">Title of section 2</h2><span class="small text-gray"><i class="fa fa-clock-o mr-1"></i>5 April, 2019</span>
-                            <p class="text-small mt-2 font-weight-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper.</p>
-                            <p class="text-small mt-2 font-weight-light">Libero expedita explicabo eius fugiat quia aspernatur autem laudantium error architecto recusandae natus sapiente sit nam eaque, consectetur porro molestiae ipsam! Deleniti.</p>
-                        </li>
-                        <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
-                            <div class="timeline-arrow"></div>
-                            <h2 class="h5 mb-0">Title of section 3</h2><span class="small text-gray"><i class="fa fa-clock-o mr-1"></i>18 August, 2019</span>
-                            <p class="text-small mt-2 font-weight-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, et elementum lorem ornare. Maecenas placerat facilisis mollis. Duis sagittis ligula in sodales vehicula....</p>
-                        </li>
-                        <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
-                            <div class="timeline-arrow"></div>
-                            <h2 class="h5 mb-0">Title of section 4</h2><span class="small text-gray"><i class="fa fa-clock-o mr-1"></i>10 October, 2019</span>
-                            <p class="text-small mt-2 font-weight-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, et elementum lorem ornare. Maecenas placerat facilisis mollis. Duis sagittis ligula in sodales vehicula....</p>
-                            <p class="text-small mt-2 font-weight-light">Voluptatibus temporibus esse illum eum aspernatur, fugiat suscipit natus! Eum corporis illum nihil officiis tempore. Excepturi illo natus libero sit doloremque, laborum molestias rerum pariatur quam ipsam necessitatibus incidunt, explicabo.</p>
-                        </li>
-                    </ul>
-                </div> <!-- /timeline -->
+                    <div id="timeline-container">
+                    </div>
+                </div>
 
                 <!-- reflection cards -->
                 <div class="col-lg mx-auto">
-                    <div class="reflection-cards sticky-offset sticky-top">
-                        <div id="carouselExampleIndicators" class="carousel slide" data-interval="false">
-                            <ol class="carousel-indicators">
-                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                            </ol>
-                            <div class="carousel-inner shadow">
-                                <div class="carousel-item active">
-                                    <div class="card bg-primary">
-                                        <div class="card-body">
-                                            <div class="card-title m-auto p-3 rounded bg-dark text-white">
-                                                <h4 class="m-0" id="prompt-number"> Prompt #1</h4>
-                                                <h5 class="m-0" id="criterion">General</h5>
-                                            </div>
-                                            <form>
-                                                <div class="form-row m-3">
-                                                    <label for="inputReflectionPrompt1">What was one project your were really proud of this year?</label>
-                                                </div>
-                                                <div class="form-row m-3">
-                                                    <input type="reflectionResponse" class="form-control" id="inputReflectionPrompt1" aria-describedby="prompt1Help" placeholder="What do you think?">
-                                                    <small id="prompt1Help" class="form-text text-muted">Be as specific as possible. Try to pick a single commit that your remember being proud of.</small>
-                                                </div>
-                                                <div class="form-row m-3 justify-content-end">
-                                                    <button type="submit" class="btn btn-secondary" href="#carouselExampleIndicators" data-slide="next">Next</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="card bg-primary">
-                                        <div class="card-body">
-                                            <div class="card-title m-auto p-3 rounded bg-dark text-white">
-                                                <h4 class="m-0" id="prompt-number"> Prompt #2</h4>
-                                                <h5 class="m-0" id="criterion">Copmutational Thinking</h5>
-                                            </div>
-                                            <form>
-                                                <div class="form-row m-3">
-                                                    <label for="inputReflectionPrompt2">What was a concept your struggled with this year?</label>
-                                                </div>
-                                                <div class="form-row m-3">
-                                                    <input type="reflectionResponse" class="form-control" id="inputReflectionPrompt2" aria-describedby="prompt2Help" placeholder="What do you think?">
-                                                    <small id="prompt1Help" class="form-text text-muted">Be as specific as possible. Try to pick a single commit you made when you were struggling.</small>
-                                                </div>
-                                                <div class="form-row m-3 justify-content-end">
-                                                    <button type="submit" class="btn btn-secondary" href="#carouselExampleIndicators" data-slide="next">Next</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="card bg-primary">
-                                        <div class="card-body">
-                                            <div class="card-title m-auto p-3 rounded bg-dark text-white">
-                                                <h4 class="m-0" id="prompt-number"> Prompt #3</h4>
-                                                <h5 class="m-0" id="criterion">Planning and Development</h5>
-                                            </div>
-                                            <form>
-                                                <div class="form-row m-3">
-                                                    <label for="inputReflectionPrompt3">What is one project you would like to continue working on?</label>
-                                                </div>
-                                                <div class="form-row m-3">
-                                                    <input type="reflectionResponse" class="form-control" id="inputReflectionPrompt3" aria-describedby="prompt3Help" placeholder="What do you think?">
-                                                    <small id="prompt1Help" class="form-text text-muted">Describe what you would do if you continued the project.</small>
-                                                </div>
-                                                <div class="form-row m-3 justify-content-end">
-                                                    <button type="submit" class="btn btn-secondary">Submit</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </div>
+                    <div id="prompt-cards-container" class="h-100">
                     </div>
                 </div> <!-- /reflection cards -->
             </div>

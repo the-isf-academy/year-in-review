@@ -49,7 +49,8 @@ function getUiConfig() {
     'signInFlow': 'popup',
     'signInOptions': [
       {
-        provider: firebase.auth.GithubAuthProvider.PROVIDER_ID
+        provider: firebase.auth.GithubAuthProvider.PROVIDER_ID,
+        scopes: ['repo', 'read:org']
       }
     ],
     // Terms of service url.
@@ -77,11 +78,10 @@ var handleSignedInUser = function(user, credential) {
         // Redirect to profile on success.
         window.location.assign('/welcome.html?access_token='+accessToken)
       }, function(error) {
-        console.log(error);
         // Refresh page on error.
         // In all cases, client side state should be lost due to in-memory
         // persistence.
-        //window.location.assign('/');
+        window.location.assign('/');
       });
   });
 };

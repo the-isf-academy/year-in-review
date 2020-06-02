@@ -74,34 +74,18 @@ class PromptCardForm extends React.Component {
     constructor(props) {
         super(props);
         this.formPages = props.formPages;
-        let req = {
-            collection: "reflections",
-            doc: "June2020"
-        }
-        let res = {};
-        getPreviousFormInput(req, res)
-            .then(res => {
-                console.log(res);
-                if (res.fields) {
-                    console.log("res has fields");
-                    this.state = {
-                        fields: res.fields,
-                        errors: {}
-                    };
-                } else {
-                    const fields = {}
-                    for (const page of props.formPages) {
-                        for (const question of page.questions) {
-                            fields[question.id] = "";
-                        }
-                    }
-                    this.state = {
-                        fields: fields,
-                        errors: {}
-                    };
-                }
+        const blankFields = {}
+        for (const page of props.formPages) {
+            for (const question of page.questions) {
+                blankFields[question.id] = "";
             }
-        );
+        }
+        this.state = {
+          fields: blankFields,
+          errors: {},
+          collection: "reflections",
+          doc: "June2020"
+        }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -134,7 +118,7 @@ class PromptCardForm extends React.Component {
         if (this.handleValidation()) {
             console.log(this.state);
             alert('Are you ready to submit your reflection?');
-            storeFormInput(this.state.fields)
+            storeFormInput(this.state.fields, req.doc)
         } else {
             console.log(this.state);
             alert("Form has errors.");
@@ -153,6 +137,16 @@ class PromptCardForm extends React.Component {
                 })}
             </form>
         )
+    }
+
+    componentDidMount(){
+      console.log("component did mount");
+      getPreviousFormInput(previousState => {
+          this.setState({fields: previousState})
+        },
+        this.state.collection,
+        this.state.doc
+      );
     }
 }
 

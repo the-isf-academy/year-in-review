@@ -10,15 +10,15 @@ export function storeUser(res){
       github_URL: res.data.url,
   })
   .then(function(docRef) {
-      console.log("Document written");
+      console.log("User written");
   })
   .catch(function(error) {
       console.error("Error adding document", error);
   });
 }
-export function storeFormInput(state){
-  db.collection("users").doc(USERNAME).collection("reflections").doc("June2020").set(state)
-  .then(function(docRef) {
+export function storeFormInput(state, reflection_name){
+  var docRef = db.collection("users").doc(USERNAME).collection("reflections").doc(reflection_name).set(state)
+  docRef.then(function(docRef) {
       alert("Submitted! Feel free to Resubmit.");
   })
   .catch(function(error) {
@@ -26,17 +26,19 @@ export function storeFormInput(state){
   });
 }
 
-export function getPreviousFormInput(req, res){
-    var docRef = db.collection("users").doc(USERNAME).collection(req.collection).doc(req.doc);
-    docRef.get().then(function(doc) {
-        if (doc.exists) {
-            res.fields = doc.data();
-        } else {
-            console.log("No such document exists for this user");
-        }
-    }).catch(function(error) {
-        console.log("Error getting document: ", error);
-    });
+export function getPreviousFormInput(callback_withform, collection, doc){
+  console.log("getting Previous Form Input");
+  var docRef = db.collection("users").doc(USERNAME).collection(collection).doc(doc);
+  docRef.get().then(function(doc) {
+    if (doc.exists) {
+        console.log("Previous Form Input exists");
+        callback_withform(doc.data())
+    } else {
+        // doc.data() will be undefined in this case
+    }
+  }).catch(function(error) {
+    console.log("Error getting document:", error);
+  });
 }
 
 export function display(username){

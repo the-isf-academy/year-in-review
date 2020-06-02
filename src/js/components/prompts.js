@@ -118,7 +118,7 @@ class PromptCardForm extends React.Component {
         if (this.handleValidation()) {
             console.log(this.state);
             alert('Are you ready to submit your reflection?');
-            storeFormInput(this.state.fields, req.doc)
+            storeFormInput(this.state.fields, this.state.collection, this.state.doc)
         } else {
             console.log(this.state);
             alert("Form has errors.");

@@ -16,8 +16,8 @@ export function storeUser(res){
       console.error("Error adding document", error);
   });
 }
-export function storeFormInput(state, reflection_name){
-  var docRef = db.collection("users").doc(USERNAME).collection("reflections").doc(reflection_name).set(state)
+export function storeFormInput(state, collectionname, docname){
+  var docRef = db.collection("users").doc(USERNAME).collection(collectionname).doc(docname).set(state)
   docRef.then(function(docRef) {
       alert("Submitted! Feel free to Resubmit.");
   })

@@ -110,6 +110,7 @@ class PromptCardForm extends React.Component {
         const name = target.name;
         fields[name] = value;
         this.setState({fields: fields});
+        storeFormInput(this.state.fields, this.state.collection, this.state.doc)
         console.log("change state of "+name+"to "+value);
     }
 
@@ -118,7 +119,7 @@ class PromptCardForm extends React.Component {
         if (this.handleValidation()) {
             console.log(this.state);
             alert('Are you ready to submit your reflection?');
-            storeFormInput(this.state.fields, this.state.collection, this.state.doc)
+            storeFormInput(this.state.fields, this.state.collection, this.state.doc, true)
         } else {
             console.log(this.state);
             alert("Form has errors.");

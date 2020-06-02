@@ -16,10 +16,10 @@ export function storeUser(res){
       console.error("Error adding document", error);
   });
 }
-export function storeFormInput(state, collectionname, docname){
+export function storeFormInput(state, collectionname, docname, isSubmit){
   var docRef = db.collection("users").doc(USERNAME).collection(collectionname).doc(docname).set(state)
   docRef.then(function(docRef) {
-      alert("Submitted! Feel free to Resubmit.");
+      if (isSubmit) alert("Submitted! Feel free to Resubmit.");
   })
   .catch(function(error) {
       console.error("Error adding document", error);

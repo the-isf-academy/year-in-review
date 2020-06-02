@@ -17,8 +17,9 @@ export function storeUser(res){
   });
 }
 export function storeFormInput(state, collectionname, docname, isSubmit){
-  var docRef = db.collection("users").doc(USERNAME).collection(collectionname).doc(docname).set(state)
-  docRef.then(function(docRef) {
+  var docRef = db.collection("users").doc(USERNAME).collection(collectionname).doc(docname)
+  docRef.set(state)
+  .then(function(docRef) {
       if (isSubmit) alert("Submitted! Feel free to Resubmit.");
   })
   .catch(function(error) {

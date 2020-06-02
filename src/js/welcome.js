@@ -23,7 +23,6 @@ octokit.request("/user")
         // Once we get the response (which has many fields)
         // Documented here: https://developer.github.com/v3/users/#get-the-authenticated-user
         // Write "Welcome <user name>" to the documents body
-        console.log(res.data)
         const welcomeHeader = document.getElementById("student-welcome")
         if (res.data.name) {
             welcomeHeader.textContent = "👾 Welcome, " + res.data.name;
@@ -85,5 +84,4 @@ var formPages = [
             }
         ]
     },
-]    
-
+]

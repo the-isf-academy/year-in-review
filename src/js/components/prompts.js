@@ -84,7 +84,7 @@ class PromptCardForm extends React.Component {
           fields: blankFields,
           errors: {},
           collection: "reflections",
-          doc: "June2020"
+          doc: "June2020",
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -119,6 +119,9 @@ class PromptCardForm extends React.Component {
         if (this.handleValidation()) {
             console.log(this.state);
             alert('Are you ready to submit your reflection?');
+            var submittedFields = this.state.fields;
+            submittedFields['isSubmit']= true;
+            this.setState({fields: submittedFields});
             storeFormInput(this.state.fields, this.state.collection, this.state.doc, true)
         } else {
             console.log(this.state);

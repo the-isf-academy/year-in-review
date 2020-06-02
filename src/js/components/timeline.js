@@ -62,7 +62,6 @@ function Timeline(props) {
                             <div key={index} className="timeline-month-container">
                                 <TimelineMonth year={yearOfRepos[0]} month={monthOfRepos[0]}/>
                                 {monthOfRepos[1].map((repo, index) => {
-                                    console.log(repo);
                                     return (
                                         <TimelineItem key={index} repo={repo}/>
                                     )

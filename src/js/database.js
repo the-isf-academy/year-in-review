@@ -26,7 +26,18 @@ export function storeFormInput(state){
   });
 }
 
-
+export function getPreviousFormInput(req, res){
+    var docRef = db.collection("users").doc(USERNAME).collection(req.collection).doc(req.doc);
+    docRef.get().then(function(doc) {
+        if (doc.exists) {
+            res.fields = doc.data();
+        } else {
+            console.log("No such document exists for this user");
+        }
+    }).catch(function(error) {
+        console.log("Error getting document: ", error);
+    });
+}
 
 export function display(username){
   var docRef = db.collection("users").doc(username);

@@ -30,20 +30,20 @@ octokit.request("/user")
         }
         storeUser(res);
         display(res.data.login);
-    })
-
-octokit.repos.listForAuthenticatedUser({
-})
-    .then(res => {
-        // Listing out the user's repositories
-        console.log(res.data)
-        const timelineDomContainer = document.querySelector('#timeline-container');
-        if (timelineDomContainer) {
-            ReactDOM.render(<Timeline repos={res.data}/>, timelineDomContainer);
-        }
-
-    })
-
+        octokit.repos.listForAuthenticatedUser({
+        })
+        .then(res => {
+            // Listing out the user's repositories
+            const timelineDomContainer = document.querySelector('#timeline-container');
+            if (timelineDomContainer) {
+                ReactDOM.render(<Timeline repos={res.data}/>, timelineDomContainer);
+            }
+            const promptsDomContainer = document.querySelector('#prompt-cards-container');
+            if (promptsDomContainer) {
+                ReactDOM.render(<PromptCard formPages={formPages} />, promptsDomContainer);
+            }
+        })
+    });
 var formPages = [
     {
         id: "G0",
@@ -87,7 +87,3 @@ var formPages = [
     },
 ]    
 
-const promptsDomContainer = document.querySelector('#prompt-cards-container');
-if (promptsDomContainer) {
-    ReactDOM.render(<PromptCard formPages={formPages} />, promptsDomContainer);
-}

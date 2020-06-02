@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {storeUser,storeFormInput, display} from '../database';
+import {storeUser,storeFormInput, getPreviousFormInput, display} from '../database';
 
 
 ;'use strict';
@@ -74,16 +74,34 @@ class PromptCardForm extends React.Component {
     constructor(props) {
         super(props);
         this.formPages = props.formPages;
-        const fields = {}
-        for (const page of props.formPages) {
-            for (const question of page.questions) {
-                fields[question.id] = "";
-            }
+        let req = {
+            collection: "reflections",
+            doc: "June2020"
         }
-        this.state = {
-            fields: fields,
-            errors: {}
-        };
+        let res = {};
+        getPreviousFormInput(req, res)
+            .then(res => {
+                console.log(res);
+                if (res.fields) {
+                    console.log("res has fields");
+                    this.state = {
+                        fields: res.fields,
+                        errors: {}
+                    };
+                } else {
+                    const fields = {}
+                    for (const page of props.formPages) {
+                        for (const question of page.questions) {
+                            fields[question.id] = "";
+                        }
+                    }
+                    this.state = {
+                        fields: fields,
+                        errors: {}
+                    };
+                }
+            }
+        );
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }

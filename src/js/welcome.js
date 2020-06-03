@@ -9,7 +9,7 @@ import { Octokit } from '@octokit/rest';
 import { graphql } from "@octokit/graphql";
 import { createTokenAuth } from "@octokit/auth-token";
 // Required for side-effects
-import {storeUser, display} from './database';
+import Fire from './Fire';
 import React from "react";
 import ReactDOM from "react-dom";
 import ContribStats from './components/contribStats';
@@ -103,11 +103,9 @@ octokit.request("/user")
         NAME = res.data.name;
         const profileImg = document.getElementById("profile-img");
         profileImg.style.setProperty("background-image", "url("+res.data.avatar_url+")");
-        storeUser(res);
-        display(res.data.login);
+        Fire.storeUser(res);
         loadPageContent();
     })
-
 
 var formPages = [
     {
@@ -151,4 +149,3 @@ var formPages = [
         ]
     },
 ]    
-

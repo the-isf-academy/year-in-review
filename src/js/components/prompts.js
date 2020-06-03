@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {storeUser,storeFormInput, display} from '../database';
+import Fire from '../Fire';
 
 
 ;'use strict';
@@ -74,16 +74,18 @@ class PromptCardForm extends React.Component {
     constructor(props) {
         super(props);
         this.formPages = props.formPages;
-        const fields = {}
+        const blankFields = {}
         for (const page of props.formPages) {
             for (const question of page.questions) {
-                fields[question.id] = "";
+                blankFields[question.id] = "";
             }
         }
         this.state = {
-            fields: fields,
-            errors: {}
-        };
+          fields: blankFields,
+          errors: {},
+          collection: "reflections",
+          doc: "June2020",
+        }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -108,6 +110,7 @@ class PromptCardForm extends React.Component {
         const name = target.name;
         fields[name] = value;
         this.setState({fields: fields});
+        Fire.storeFormInput(this.state.fields, this.state.collection, this.state.doc)
         console.log("change state of "+name+"to "+value);
     }
 
@@ -116,7 +119,10 @@ class PromptCardForm extends React.Component {
         if (this.handleValidation()) {
             console.log(this.state);
             alert('Are you ready to submit your reflection?');
-            storeFormInput(this.state.fields)
+            var submittedFields = this.state.fields;
+            submittedFields['isSubmit']= true;
+            this.setState({fields: submittedFields});
+            Fire.storeFormInput(this.state.fields, this.state.collection, this.state.doc, true)
         } else {
             console.log(this.state);
             alert("Form has errors.");
@@ -135,6 +141,16 @@ class PromptCardForm extends React.Component {
                 })}
             </form>
         )
+    }
+
+    componentDidMount(){
+      console.log("component did mount");
+      Fire.getPreviousFormInput(previousState => {
+          this.setState({fields: previousState})
+        },
+        this.state.collection,
+        this.state.doc
+      );
     }
 }
 

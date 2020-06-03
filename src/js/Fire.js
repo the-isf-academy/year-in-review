@@ -71,6 +71,7 @@ class Fire {
           console.log("Previous Form Input exists");
           callback_withform(doc.data())
       } else {
+        console.log("no previous data");
           // doc.data() will be undefined in this case
       }
     }).catch(function(error) {

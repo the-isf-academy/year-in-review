@@ -39,12 +39,7 @@ function DropdownQuestion(props) {
 }
 
 function PromptCardPage(props) {
-    const blankFields = {}
-    for (const page of props.formPages) {
-        for (const question of page.questions) {
-            blankFields[question.id] = "";
-        }
-    }
+    console.log(props);
     return (
         <div className={props.index == 0 ? "carousel-item active" : "carousel-item"}>
             <div className="card bg-primary">

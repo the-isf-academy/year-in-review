@@ -18,7 +18,7 @@ import PromptCard from './components/prompts';
 let EMAIL = "";
 let USER = "";
 let year = "2019-2020";
-let unit = "Test";
+let unit = "EndofYear";
 
 // Call the user info API using the fetch browser library
 const octokit = new Octokit({

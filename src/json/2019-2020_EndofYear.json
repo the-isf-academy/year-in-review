@@ -8,12 +8,12 @@
           "questions": [
               {
                   "id": "G0.0",
-                  "prompt": "In this question, we’re going to ask you about your projects. What about this project makes you proud?",
+                  "prompt": "In this question, we’re going to ask you about your projects. What project would you want to continue working on if you had to choose one?",
                   "inputStyle": "textInput"
               },
               {
                   "id": "G0.1",
-                  "prompt": "What about this project makes you proud?",
+                  "prompt": "What would you do if you continued working on this project?",
                   "inputStyle": "textInput"
               }
           ]
@@ -175,7 +175,8 @@
           "questions": [
               {
                   "id": "D0.0",
-                  "prompt": "In this question, we’re going to ask you about your projects. What is one idea from the year that seems really important that you think other people should be aware of?"
+                  "prompt": "In this question, we’re going to ask you about your projects. What is one idea from the year that seems really important that you think other people should be aware of?",
+                  "inputStyle": "textInput"
               },
               {
                   "id": "D0.1",

@@ -32,7 +32,10 @@ body {
 .profile-img{
     margin-right: 5px;
     float: left;
-    background: url(https://upload.wikimedia.org/wikipedia/commons/a/ae/Katri.jpg) 50% 50% no-repeat; /* 50% 50% centers image in div */
+    background-image: url(https://upload.wikimedia.org/wikipedia/commons/a/ae/Katri.jpg);
+    background-position-x: 50%;
+    background-position-y: 50%;
+    background-repeat: no-repeat; /* 50% 50% centers image in div */
     background-size: auto 100%; /* Interchange this value depending on prefering width vs. height */
     width: 20px;
     height: 20px;

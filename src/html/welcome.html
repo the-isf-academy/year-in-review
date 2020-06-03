@@ -14,7 +14,7 @@
         <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown ml-auto">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <div class="rounded-circle profile-img"></div>
+                    <div class="rounded-circle profile-img" id="profile-img"></div>
                     <span class="caret"></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
@@ -33,16 +33,15 @@
                     <!-- welcome  message -->
                     <div class="col-lg mx-auto">
                         <div class="welcome">
-                            <h1 id="student-welcome"> 👾 Welcome, student. </h1>
+                            <h1 id="student-welcome"> 👾 Welcome </h1>
                             <p> Scroll down to see the repositories you have contributed to this year.</p>
                         </div>
                     </div><!-- /welcome message -->
 
                     <!-- github contrib graph -->
                     <div class="col-lg mx-auto">
-                        <h2> You contributed to 10 repositories </h2>
-                        <h2> with 100 commits </h2>
-                        <h2> containing 1000 lines of code. </h2>
+                        <div id="contrib-stats-container">
+                        </div>
                     </div> <!-- /contrib graph -->
 
                 </div>

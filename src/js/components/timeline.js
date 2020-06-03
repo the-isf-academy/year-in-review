@@ -14,7 +14,7 @@ function TimelineMonth(props) {
 }
 
 function TimelineItem(props) {
-    let date = new Date(props.repo.created_at);
+    let date = new Date(props.repo.createdAt);
     return (
         <li className="timeline-item bg-white rounded ml-3 p-4 shadow">
             <div className="timeline-arrow"></div>
@@ -23,7 +23,7 @@ function TimelineItem(props) {
             <div className="container repo-buttons">
                 <div className="row align-items-center">
                     <div className="col-lg mx-auto">
-                        <a className="repo-link btn btn-outline-primary" href={props.repo.svn_url} role="button" target="_blank" rel="noopener noreferrer">Github Repository</a>
+                        <a className="repo-link btn btn-outline-primary" href={props.repo.url} role="button" target="_blank" rel="noopener noreferrer">Github Repository</a>
                     </div>
                     <div className="col-lg mx-auto">
                         <a className="assign-link btn btn-outline-primary" href="#" role="button"  target="_blank" rel="noopener noreferrer">Assignment Page</a>
@@ -37,7 +37,7 @@ function TimelineItem(props) {
 function Timeline(props) {
     var reposByMonthYear = {}
     for (const repo of props.repos) {
-        let date = new Date(repo.created_at);
+        let date = new Date(repo.createdAt);
         const month = date.getMonth();
         const year = date.getFullYear();
         if (reposByMonthYear[year]) {

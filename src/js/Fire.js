@@ -6,22 +6,30 @@ var config = require('../server/firebase_config.js');
 class Fire {
   constructor() {
     this.username = "";
-    console.log(firebase.apps.length)
+    this.year = "";
+    this.unit = "";
 		if (!firebase.apps.length) {
-			firebase.initializeApp({
-        apiKey: "AIzaSyDbnMja9tFjlu0oNyEYbWlanQFs7yGm0IE",
-        authDomain: "year-in-review-89e1b.firebaseapp.com",
-        databaseURL: "https://year-in-review-89e1b.firebaseio.com",
-        projectId: "year-in-review-89e1b",
-        storageBucket: "year-in-review-89e1b.appspot.com",
-        messagingSenderId: "1090132386714",
-        appId: "1:1090132386714:web:2e365ed2bfcca7b4749023",
-        measurementId: "G-YZHN2ESS4R"
-      });
+			firebase.initializeApp(config);
 		}
     this.db = firebase.firestore();
 	}
 
+  /* getFormPage   //Adapted from https://stackoverflow.com/questions/52100103/getting-all-documents-from-one-collection-in-firestore
+  * Takes a string of a year (must be a Firebase doc name ) and a unit (must be a Firebase collection name)
+  * and retrieves all of the docs stored under the collection "unit" (prompts -> year -> unit)
+  * and combines them into an array of Javascript objects
+  */
+  async getFormPage(year, unit) {
+    this.year = year;
+    this.unit = unit;
+    const snapshot = await this.db.collection("prompts").doc(year).collection(unit).get();
+    return snapshot.docs.map(doc => doc.data());
+  }
+
+  /* storeUser
+  * Takes a github User Object
+  * and stores user name and URL in the document (users -> userloginname)
+  */
   storeUser(res) {
     this.username = res.data.login;
     this.db.collection("users").doc(res.data.login).set({
@@ -35,8 +43,13 @@ class Fire {
         console.error("Error adding document", error);
     });
   };
-  storeFormInput(state, collectionname, docname, isSubmit){
-    var docRef = this.db.collection("users").doc(this.username).collection(collectionname).doc(docname)
+
+  /* storeFormInput
+  * Saves state object as a Firebase doc, stored under a document "unit" (users -> user's name -> year -> unit)
+  * If the user presses the submit button, alerts the user about submission
+  */
+  storeFormInput(state, isSubmit){
+    var docRef = this.db.collection("users").doc(this.username).collection(this.year).doc(this.unit)
     docRef.set(state)
     .then(function(docRef) {
         if (isSubmit) alert("Submitted! Feel free to Resubmit.");
@@ -46,9 +59,13 @@ class Fire {
     });
   }
 
-  getPreviousFormInput(callback_withform, collection, doc){
+  /* getPreviousFormInput
+  * Retrieves previous form input from Firebase with the username, year, and unit stored in the Fire class
+  * Upon success, performs callback from prompts.js
+  */
+  getPreviousFormInput(callback_withform){
     console.log("getting Previous Form Input");
-    var docRef = this.db.collection("users").doc(this.username).collection(collection).doc(doc);
+    var docRef = this.db.collection("users").doc(this.username).collection(this.year).doc(this.unit);
     docRef.get().then(function(doc) {
       if (doc.exists) {
           console.log("Previous Form Input exists");
@@ -59,21 +76,6 @@ class Fire {
     }).catch(function(error) {
       console.log("Error getting document:", error);
     });
-  }
-
-  display(username){
-    var docRef = this.db.collection("users").doc(username);
-    docRef.get().then(function(doc) {
-        if (doc.exists) {
-            console.log("Document data:", doc.data().name);
-        } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
-        }
-    }).catch(function(error) {
-        console.log("Error getting document:", error);
-    });
-
   }
 }
 

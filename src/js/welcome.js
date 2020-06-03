@@ -14,8 +14,11 @@ import ContribStats from './components/contribStats';
 import Timeline from './components/timeline';
 import PromptCard from './components/prompts';
 
+
 let EMAIL = "";
 let USER = "";
+let year = "2019-2020";
+let unit = "Test";
 
 // Call the user info API using the fetch browser library
 const octokit = new Octokit({
@@ -42,6 +45,17 @@ octokit.request("/user")
         let reposContrib = new Set();
         console.log("email: ", EMAIL);
         console.log("user: ", USER);
+        octokit.paginate(octokit.repos.listForAuthenticatedUser, {
+        })
+            .then(res => {
+                // Listing out the user's repositories
+                console.log(res)
+                const timelineDomContainer = document.querySelector('#timeline-container');
+                if (timelineDomContainer) {
+                    ReactDOM.render(<Timeline repos={res}/>, timelineDomContainer);
+                }
+
+        });
         octokit.paginate(octokit.activity.listEventsForAuthenticatedUser,
             {
                 username: USER
@@ -64,63 +78,14 @@ octokit.request("/user")
                 ReactDOM.render(<ContribStats numRepos={reposContrib.size} numCommits={commitsCount}/>, contribStatsContainer);
             });
         Fire.storeUser(res);
-    })
+    });
 
-octokit.paginate(octokit.repos.listForAuthenticatedUser, {
-})
-    .then(res => {
-        // Listing out the user's repositories
-        console.log(res)
-        const timelineDomContainer = document.querySelector('#timeline-container');
-        if (timelineDomContainer) {
-            ReactDOM.render(<Timeline repos={res}/>, timelineDomContainer);
-        }
-        const promptsDomContainer = document.querySelector('#prompt-cards-container');
-        if (promptsDomContainer) {
-            ReactDOM.render(<PromptCard formPages={formPages} />, promptsDomContainer);
-        }
-
-    })
-
-var formPages = [
-    {
-        id: "G0",
-        criterion: "General",
-        questions: [
-            {
-                id: "G0.0",
-                prompt: "What is your name?",
-                inputStyle: "textInput",
-            },
-            {
-                id: "G0.1",
-                prompt: "How old are you?",
-                inputStyle: "dropdown",
-                inputOptions: [1, 2, 3, 4],
-            }
-        ]
-    },
-    {
-        id: "A0",
-        criterion: "Computational thinking",
-        questions: [
-            {
-                id: "A0.0",
-                prompt: "Here’s a list of concepts we covered this year. Choose a concept that you think is really beautiful or interesting.",
-                inputStyle: "dropdown",
-                inputOptions: ["Functions", "Lists", "Loops"]
-            },
-            {
-                id: "A0.1",
-                prompt: "Select a project that you think showcases the beauty of this concept.",
-                inputStyle: "dropdown",
-                inputOptions: ["Lab1", "lab2", "Lab3"]
-            },
-            {
-                id: "A0.2",
-                prompt: "Describe why you think this project shows the beauty of this concept.",
-                inputStyle: "textInput",
-            }
-        ]
-    },
-]
+//get the right formPages from Firebase
+(async() => {
+  var formPages = await Fire.getFormPage(year, unit);
+  console.log(formPages);
+  const promptsDomContainer = document.querySelector('#prompt-cards-container');
+    if (promptsDomContainer) {
+        ReactDOM.render(<PromptCard formPages={formPages} />, promptsDomContainer);
+    }
+})();

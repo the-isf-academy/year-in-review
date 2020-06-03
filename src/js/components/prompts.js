@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Fire from '../Fire';
 
 
+
 ;'use strict';
 
 function TextInputQuestion(props) {
@@ -17,6 +18,8 @@ function TextInputQuestion(props) {
 }
 
 function DropdownQuestion(props) {
+    console.log('read me');
+    console.log(props.question.inputOptions);
     return (
         <div className="form-row m-3">
             <label>
@@ -36,6 +39,12 @@ function DropdownQuestion(props) {
 }
 
 function PromptCardPage(props) {
+    const blankFields = {}
+    for (const page of props.formPages) {
+        for (const question of page.questions) {
+            blankFields[question.id] = "";
+        }
+    }
     return (
         <div className={props.index == 0 ? "carousel-item active" : "carousel-item"}>
             <div className="card bg-primary">
@@ -82,9 +91,7 @@ class PromptCardForm extends React.Component {
         }
         this.state = {
           fields: blankFields,
-          errors: {},
-          collection: "reflections",
-          doc: "June2020",
+          errors: {}
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -110,7 +117,7 @@ class PromptCardForm extends React.Component {
         const name = target.name;
         fields[name] = value;
         this.setState({fields: fields});
-        Fire.storeFormInput(this.state.fields, this.state.collection, this.state.doc)
+        // Fire.storeFormInput(this.state.fields)
         console.log("change state of "+name+"to "+value);
     }
 
@@ -122,7 +129,7 @@ class PromptCardForm extends React.Component {
             var submittedFields = this.state.fields;
             submittedFields['isSubmit']= true;
             this.setState({fields: submittedFields});
-            Fire.storeFormInput(this.state.fields, this.state.collection, this.state.doc, true)
+            Fire.storeFormInput(this.state.fields,true)
         } else {
             console.log(this.state);
             alert("Form has errors.");
@@ -147,10 +154,7 @@ class PromptCardForm extends React.Component {
       console.log("component did mount");
       Fire.getPreviousFormInput(previousState => {
           this.setState({fields: previousState})
-        },
-        this.state.collection,
-        this.state.doc
-      );
+        });
     }
 }
 

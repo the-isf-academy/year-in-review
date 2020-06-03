@@ -7,7 +7,7 @@ const token = query.split('access_token=')[1]
 
 import { Octokit } from '@octokit/rest';
 // Required for side-effects
-import {storeUser, display} from './database';
+import Fire from './Fire';
 import React from "react";
 import ReactDOM from "react-dom";
 import ContribStats from './components/contribStats';
@@ -37,6 +37,7 @@ octokit.request("/user")
         if (res.data.name) {
             welcomeHeader.textContent = "👾 Welcome, " + res.data.name + ".";
         }
+        Fire.storeUser(res);
         let commitsCount = 0;
         let reposContrib = new Set();
         console.log("email: ", EMAIL);
@@ -77,7 +78,6 @@ octokit.paginate(octokit.repos.listForAuthenticatedUser, {
         }
 
     })
-
 
 var formPages = [
     {
@@ -120,9 +120,4 @@ var formPages = [
             }
         ]
     },
-]    
-
-const promptsDomContainer = document.querySelector('#prompt-cards-container');
-if (promptsDomContainer) {
-    ReactDOM.render(<PromptCard formPages={formPages} />, promptsDomContainer);
-}
+]

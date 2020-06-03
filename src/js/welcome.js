@@ -63,8 +63,7 @@ octokit.request("/user")
                 const contribStatsContainer = document.querySelector('#contrib-stats-container');
                 ReactDOM.render(<ContribStats numRepos={reposContrib.size} numCommits={commitsCount}/>, contribStatsContainer);
             });
-        storeUser(res);
-        display(res.data.login);
+        Fire.storeUser(res);
     })
 
 octokit.paginate(octokit.repos.listForAuthenticatedUser, {
@@ -75,6 +74,10 @@ octokit.paginate(octokit.repos.listForAuthenticatedUser, {
         const timelineDomContainer = document.querySelector('#timeline-container');
         if (timelineDomContainer) {
             ReactDOM.render(<Timeline repos={res}/>, timelineDomContainer);
+        }
+        const promptsDomContainer = document.querySelector('#prompt-cards-container');
+        if (promptsDomContainer) {
+            ReactDOM.render(<PromptCard formPages={formPages} />, promptsDomContainer);
         }
 
     })

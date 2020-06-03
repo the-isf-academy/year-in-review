@@ -66,14 +66,14 @@ octokit.request("/user")
         display(res.data.login);
     })
 
-octokit.repos.listForAuthenticatedUser({
+octokit.paginate(octokit.repos.listForAuthenticatedUser, {
 })
     .then(res => {
         // Listing out the user's repositories
-        console.log(res.data)
+        console.log(res)
         const timelineDomContainer = document.querySelector('#timeline-container');
         if (timelineDomContainer) {
-            ReactDOM.render(<Timeline repos={res.data}/>, timelineDomContainer);
+            ReactDOM.render(<Timeline repos={res}/>, timelineDomContainer);
         }
 
     })

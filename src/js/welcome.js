@@ -7,7 +7,7 @@ const token = query.split('access_token=')[1]
 
 import { Octokit } from '@octokit/rest';
 // Required for side-effects
-import {storeUser, display} from './database';
+import Fire from './Fire';
 import React from "react";
 import ReactDOM from "react-dom"
 import Timeline from './components/timeline'
@@ -27,8 +27,7 @@ octokit.request("/user")
         if (res.data.name) {
             welcomeHeader.textContent = "👾 Welcome, " + res.data.name;
         }
-        storeUser(res);
-        display(res.data.login);
+        Fire.storeUser(res);
         octokit.repos.listForAuthenticatedUser({
         })
         .then(res => {

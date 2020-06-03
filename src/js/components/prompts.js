@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {storeUser,storeFormInput, getPreviousFormInput, display} from '../database';
+import Fire from '../Fire';
 
 
 ;'use strict';
@@ -110,7 +110,7 @@ class PromptCardForm extends React.Component {
         const name = target.name;
         fields[name] = value;
         this.setState({fields: fields});
-        storeFormInput(this.state.fields, this.state.collection, this.state.doc)
+        Fire.storeFormInput(this.state.fields, this.state.collection, this.state.doc)
         console.log("change state of "+name+"to "+value);
     }
 
@@ -122,7 +122,7 @@ class PromptCardForm extends React.Component {
             var submittedFields = this.state.fields;
             submittedFields['isSubmit']= true;
             this.setState({fields: submittedFields});
-            storeFormInput(this.state.fields, this.state.collection, this.state.doc, true)
+            Fire.storeFormInput(this.state.fields, this.state.collection, this.state.doc, true)
         } else {
             console.log(this.state);
             alert("Form has errors.");
@@ -145,7 +145,7 @@ class PromptCardForm extends React.Component {
 
     componentDidMount(){
       console.log("component did mount");
-      getPreviousFormInput(previousState => {
+      Fire.getPreviousFormInput(previousState => {
           this.setState({fields: previousState})
         },
         this.state.collection,

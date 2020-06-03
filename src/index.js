@@ -4,7 +4,6 @@ import './scss/custom.scss'
 
 import './server/firebase.js'
 import './js/welcome.js'
-import './js/database.js'
+import './js/Fire.js'
 // Log message to console
 logMessage('Welcome to Year in Review!')
-

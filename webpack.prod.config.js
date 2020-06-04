@@ -2,7 +2,7 @@ const path = require("path")
 const webpack = require('webpack')
 const HtmlWebPackPlugin = require("html-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
+const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 module.exports = {
@@ -21,11 +21,7 @@ module.exports = {
   // Webpack 5 will likely come with one
   optimization: {
     minimizer: [
-      new UglifyJsPlugin({
-        cache: true,
-        parallel: true,
-        sourceMap: true // set to true if you want JS source maps
-      }),
+      new TerserPlugin(),
       new OptimizeCSSAssetsPlugin({})
     ]
   },
@@ -33,7 +29,7 @@ module.exports = {
     rules: [
       {
         // Transpiles ES6-8 into ES5
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|es6)$/,
         exclude: /node_modules/,
         loader: "babel-loader",
       },

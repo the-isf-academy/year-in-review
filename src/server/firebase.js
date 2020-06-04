@@ -12,6 +12,8 @@
  * limitations under the License.
  */
 
+const page = window.location.pathname;
+
 var firebase = require('firebase');
 var firebaseui = require('firebaseui');
 var config = require('./firebase_config.js');
@@ -102,19 +104,23 @@ var postIdTokenToSessionLogin = function(url, idToken, csrfToken) {
   });
 };
 
-/**
- * Initializes the app.
- */
-var initApp = function() {
-  // Renders sign-in page using FirebaseUI.
-  ui.start('#firebaseui-container', getUiConfig());
-};
 
-// Initialize Firebase app.
-firebase.initializeApp(config);
-// Set persistence to none.
-firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
-// Initialize the FirebaseUI Widget using Firebase.
-var ui = new firebaseui.auth.AuthUI(firebase.auth());
-// On page ready, initialize app.
-window.addEventListener('load', initApp);
+if (page == "/") {
+
+    /**
+     * Initializes the app.
+     */
+    var initApp = function() {
+        // Renders sign-in page using FirebaseUI.
+        ui.start('#firebaseui-container', getUiConfig());
+    };
+
+    // Initialize Firebase app.
+    firebase.initializeApp(config);
+    // Set persistence to none.
+    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
+    // Initialize the FirebaseUI Widget using Firebase.
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    // On page ready, initialize app.
+    window.addEventListener('load', initApp);
+}

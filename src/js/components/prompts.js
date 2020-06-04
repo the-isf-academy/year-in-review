@@ -11,7 +11,7 @@ function TextInputQuestion(props) {
             <label>
                 {props.question.prompt}
             </label>
-                <textarea name={props.question.id} value={props.formState.fields[props.question.id]} onChange={props.formHandleChange} className="form-control" aria-describedby={"prompt"+props.index+"Help"} placeholder="What do you think?"/>
+                <textarea name={props.question.id} value={props.formState.fields[props.question.id]} rows="1" onChange={props.formHandleChange} className="form-control" aria-describedby={"prompt"+props.index+"Help"} placeholder="What do you think?"/>
                 <small id={"prompt"+props.question.id+"Help"} className="form-text text-muted">{props.formState.errors[props.question.id]}</small>
         </div>
     )

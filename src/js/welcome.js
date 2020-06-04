@@ -80,7 +80,7 @@ function loadTopContent(numCommits, numRepos) {
 function loadTimelineContent(repos) {
     const timelineDomContainer = document.querySelector('#timeline-container');
     if (timelineDomContainer) {
-        ReactDOM.render(<Timeline repos={repos}/>, timelineDomContainer);
+        ReactDOM.render(<Timeline repos={repos} user={USER}/>, timelineDomContainer);
     }
 }
 

@@ -36,9 +36,6 @@ class Fire {
         name: res.data.name,
         github_URL: res.data.url,
     })
-    .then(function(docRef) {
-        console.log("User written");
-    })
     .catch(function(error) {
         console.error("Error adding document", error);
     });
@@ -64,14 +61,11 @@ class Fire {
   * Upon success, performs callback from prompts.js
   */
   getPreviousFormInput(callback_withform){
-    console.log("getting Previous Form Input");
     var docRef = this.db.collection("users").doc(this.username).collection(this.year).doc(this.unit);
     docRef.get().then(function(doc) {
       if (doc.exists) {
-          console.log("Previous Form Input exists");
           callback_withform(doc.data())
       } else {
-        console.log("no previous data");
           // doc.data() will be undefined in this case
       }
     }).catch(function(error) {

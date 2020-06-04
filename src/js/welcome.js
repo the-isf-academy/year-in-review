@@ -2,8 +2,9 @@ import 'bootstrap';
 // import './scss/custom.scss';
 // We can get the token from the "access_token" query
 // param, available in the browsers "location" global
-const query = window.location.search.substring(1)
-const token = query.split('access_token=')[1]
+const page = window.location.pathname;
+const query = window.location.search.substring(1);
+const token = query.split('access_token=')[1];
 
 import { Octokit } from '@octokit/rest';
 import { graphql } from "@octokit/graphql";
@@ -57,7 +58,6 @@ function loadPageContent() {
                 }
             )
                 .then( res => {
-                    console.log(res);
                     const totalCommits = res.user.contributionsCollection.contributionCalendar.totalContributions;
                     const totalRepos = res.user.repositories.nodes.length;
                     const repos = res.user.repositories.nodes
@@ -86,7 +86,6 @@ function loadTimelineContent(repos) {
 
 async function loadPromptCardContent() {
   var formPages = await Fire.getFormPage(year, unit);
-  console.log(formPages);
   const promptsDomContainer = document.querySelector('#prompt-cards-container');
     if (promptsDomContainer) {
         ReactDOM.render(<PromptCard formPages={formPages} />, promptsDomContainer);
@@ -96,19 +95,21 @@ async function loadPromptCardContent() {
 
 // Call the user info API using the fetch browser library
 
-const octokit = new Octokit({
-    auth: token
-})
-octokit.request("/user")
-    .then(res => {
-        // Once we get the response (which has many fields)
-        // Documented here: https://developer.github.com/v3/users/#get-the-authenticated-user
-        // Write "Welcome <user name>" to the documents body
-        EMAIL = res.data.email;
-        USER = res.data.login;
-        NAME = res.data.name;
-        const profileImg = document.getElementById("profile-img");
-        profileImg.style.setProperty("background-image", "url("+res.data.avatar_url+")");
-        Fire.storeUser(res);
-        loadPageContent();
+if (page == '/welcome.html') {
+    const octokit = new Octokit({
+        auth: token
     })
+    octokit.request("/user")
+        .then(res => {
+            // Once we get the response (which has many fields)
+            // Documented here: https://developer.github.com/v3/users/#get-the-authenticated-user
+            // Write "Welcome <user name>" to the documents body
+            EMAIL = res.data.email;
+            USER = res.data.login;
+            NAME = res.data.name;
+            const profileImg = document.getElementById("profile-img");
+            profileImg.style.setProperty("background-image", "url("+res.data.avatar_url+")");
+            Fire.storeUser(res);
+            loadPageContent();
+        })
+}

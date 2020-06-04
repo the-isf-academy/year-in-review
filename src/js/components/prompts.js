@@ -18,8 +18,6 @@ function TextInputQuestion(props) {
 }
 
 function DropdownQuestion(props) {
-    console.log('read me');
-    console.log(props.question.inputOptions);
     return (
         <div className="form-row m-3">
             <label>
@@ -39,7 +37,6 @@ function DropdownQuestion(props) {
 }
 
 function PromptCardPage(props) {
-    console.log(props);
     return (
         <div className={props.index == 0 ? "carousel-item active" : "carousel-item"}>
             <div className="card bg-primary">
@@ -65,7 +62,7 @@ function PromptCardPage(props) {
                     <div className="form-row m-3 justify-content-end">
                         {props.index == props.numPages-1
                             ? <input type="submit" className="btn btn-secondary" value="Submit"/>
-                            : <input type="submit" className="btn btn-secondary" href="#carouselExampleIndicators" data-slide="next" value="Next"/>
+                            : <input type="button" className="btn btn-secondary" href="#carouselExampleIndicators" data-slide="next" onClick={props.formHandleNext} value="Next"/>
                         }
                     </div>
                 </div>
@@ -89,6 +86,7 @@ class PromptCardForm extends React.Component {
           errors: {}
         }
         this.handleChange = this.handleChange.bind(this);
+        this.handleNext = this.handleNext.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -112,21 +110,21 @@ class PromptCardForm extends React.Component {
         const name = target.name;
         fields[name] = value;
         this.setState({fields: fields});
-        // Fire.storeFormInput(this.state.fields)
-        console.log("change state of "+name+"to "+value);
+    }
+
+    handleNext(event) {
+        Fire.storeFormInput(this.state.fields, false)
     }
 
     handleSubmit(event) {
         event.preventDefault();
         if (this.handleValidation()) {
-            console.log(this.state);
             alert('Are you ready to submit your reflection?');
             var submittedFields = this.state.fields;
             submittedFields['isSubmit']= true;
             this.setState({fields: submittedFields});
             Fire.storeFormInput(this.state.fields,true)
         } else {
-            console.log(this.state);
             alert("Form has errors.");
         }
     }
@@ -138,7 +136,7 @@ class PromptCardForm extends React.Component {
                     return (
                         <PromptCardPage key={index} index={index} formState={this.state}
                             formHandleChange={this.handleChange} formHandleSubmit={this.handleSubmit}
-                            page={page} numPages={this.formPages.length} />
+                            page={page} numPages={this.formPages.length} formHandleNext={this.handleNext} />
                     );
                 })}
             </form>
@@ -146,7 +144,6 @@ class PromptCardForm extends React.Component {
     }
 
     componentDidMount(){
-      console.log("component did mount");
       Fire.getPreviousFormInput(previousState => {
           this.setState({fields: previousState})
         });
